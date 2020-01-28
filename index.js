@@ -40,5 +40,14 @@ const nextQuoteAndImage = () => {
   });
 };
 
+const timer = new Timer(() => {
+  nextQuoteAndImage();
+}, 10000);
+
+const handleClick = () => {
+  nextQuoteAndImage();
+  timer.reset();
+};
+
 // first function call for init
 nextQuoteAndImage();
