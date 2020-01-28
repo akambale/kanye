@@ -40,5 +40,5 @@ const nextQuoteAndImage = () => {
   });
 };
 
-//init
+// first function call for init
 nextQuoteAndImage();
