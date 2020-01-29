@@ -27,17 +27,29 @@ const animationOptions = () => {
 
 const quote = document.getElementById('quote');
 const image = document.getElementById('image');
+const main = document.getElementsByTagName('main')[0];
+
+let prevOne;
 
 const nextQuoteAndImage = () => {
   const [one, two] = animationOptions();
-  quote.className = '';
-  image.className = '';
-  getQuote().then(res => {
-    quote.innerText = `"${res}"`;
-    image.src = getImage();
-    quote.classList.add(one);
-    image.classList.add(two);
-  });
+  if (prevOne === one) {
+    nextQuoteAndImage();
+    return;
+  }
+  prevOne = one;
+  main.classList.add('fade');
+  setTimeout(() => {
+    getQuote().then(res => {
+      quote.innerText = `"${res}"`;
+      image.src = getImage();
+      quote.className = '';
+      image.className = '';
+      main.classList.remove('fade');
+      quote.classList.add(one);
+      image.classList.add(two);
+    });
+  }, 1000);
 };
 
 const timer = new Timer(() => {
